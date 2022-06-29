@@ -120,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # if you wants to make static forder for all projects you can use this code.
-STATIC_DIRS = [
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static"),
     '/home/hasan/Desktop/myprojects/2020/Bloger/src/static',
 ]
