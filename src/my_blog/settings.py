@@ -120,10 +120,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # if you wants to make static forder for all projects you can use this code.
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,"static"),
-    '/home/hasan/Desktop/myprojects/2020/Bloger/src/static',
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR,"static"),
+#     '/home/hasan/Desktop/myprojects/2020/Bloger/src/static',
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
