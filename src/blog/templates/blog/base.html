@@ -1,0 +1,147 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="ar">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <!--<title>مدونة</title>-->
+        {%if title%}
+        <title>مدونة | {{title}}</title>
+        {%else%}
+        <title>مدونة</title>
+        {%endif%}
+        <link rel="stylesheet" href="{% static 'blog/css/bootstrap.mini.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+        <link rel="shortcut icon" href="{% static 'blog/images/favicon.ico' %}">
+    </head>
+    <body>
+        <header>
+            <!-- Start NavBar-->
+            <nav class="navbar navbar-expand-lg bg-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    <img src="{% static 'blog/images/logo.png'%}" alt="شعار مدونة" width="30px" height="">
+                    مدونة</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">الرئيسية</a>
+                      </li>
+                      
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          دوراتي
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">دورة بايثون</a></li>
+                          <li><a class="dropdown-item" href="#">دورة ديجانغو</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">دورة نظام التعلم</a></li>
+                        </ul>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">من نحن</a>
+                      </li>
+                    </ul>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#">تسجيل الدخول</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">تسجيل</a></li>
+                    </ul>
+                   
+                  </div>
+                </div>
+            </nav>
+             <!--End Navbar-->
+        </header>
+        <section>
+            <div class="container">
+                <div class="row mt-4" >
+                    <div class="col-md-8">
+                        {% block content %}
+
+                        {% endblock content %}
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <h3 class="text-center bg-secondary text-light p-2">آخر التدوينات</h3>
+
+                          {% include 'blog/latest_posts.html' %}
+                          
+                        </div>
+                        <div class="card mb-3">
+                            <h3 class="text-center bg-secondary text-light p-2">آخر التعليقات</h3>
+                            <ul>
+                                <li><a class="text-dark" href="#">التعليق الأول</a></li>
+                                <li><a class="text-dark" href="#">التعليق الثاني</a></li>
+                                <li><a class="text-dark" href="#">التعليق الثالث</a></li>
+                                <li><a class="text-dark" href="#">التعليق الرابع</a></li>
+                                <li><a class="text-dark" href="#">التعليق الخامس</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </section>
+        <footer class="bg-secondary">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="card-group mt-3 ">
+                            <div class="card m-3">
+                                <h3 class="card-taite text-center border-bottom p-2 m-3">من أنا</h3>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <img src="{% static 'blog/images/logo.png'%}" alt="شعار مدونة" width="100px">
+                                    </div>
+                                    من انا من انا من انا من انا من انا من انا من انا من انا من انا 
+                                </div>
+                            </div>
+                            <div class="card m-3">
+                                <h3 class="card-taite text-center border-bottom p-2 m-3">مواقع هامة</h3>
+                                <div class="card-body">
+                                   <ul>
+                                    <li><a class="text-secondary" href="#">الموقع الأول</a></li>
+                                    <li><a class="text-secondary" href="#">الموقع الثاني</a></li>
+                                    <li><a class="text-secondary" href="#">الموقع الثالث</a></li>
+                                    <li><a class="text-secondary" href="#">الموقع الرابع</a></li>
+                                    <li><a class="text-secondary" href="#">الموقع الخامس</a></li>
+                                   </ul>                         
+                                </div>
+                            </div>
+                            <div class="card m-3">
+                                <h3 class="card-taite text-center border-bottom p-2 m-3">مواقع التواصل الاجتماعي</h3>
+                                <h4 class="card-body text-center">
+                                     <a class="text-secondary" href=""><i class="fab fa-facebook" ></i></a>
+                                     <a class="text-secondary" href=""><i class="fab fa-twitter" ></i></a>
+                                     <a class="text-secondary" href=""><i class="fab fa-instagram" ></i></a>
+                                     <a class="text-secondary" href=""><i class="fab fa-youtube" ></i></a>
+                                     <a class="text-secondary" href=""><i class="fab fa-telegram" ></i></a>
+                                     <a class="text-secondary" href=""><i class="fab fa-linkedin" ></i></a>
+                                                     
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row p-2" >
+                     <div class="col-md text-center ">
+                        <small class="text-light">&copy;جميع الحقوق محفوظة</small>
+                     </div>
+                </div>
+                <div class=""> </div>
+            </div>
+            
+        </footer>
+        <!--<div><i class="fa-solid fa-house-user"></i> حباييب غلبي </div>-->
+        <script src="{% static  'blog/js/jquery-3.x-git.slim.min.js' %}"></script>
+        <script src="{% static  'blog/js/popper.min.js' %}"></script>
+        <script src="{% static  'blog/js/bootstrap.min.js' %}"></script>
+        <script src="{% static  'blog/js/fontawesome-all.min.js' %}"></script>
+    </body>
+</html>
