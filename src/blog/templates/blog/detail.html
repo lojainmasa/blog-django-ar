@@ -1,7 +1,7 @@
 !<!-- video 27-->
 {% extends 'blog/base.html' %}
 {% block content %}
- 
+ {%load crispy_forms_tags%}
        <div class="border p-3 mb-3" >
               <img class="img-fluid rounded-circle border mb-2" width="70px" height=""
                       src=""  
@@ -20,12 +20,21 @@
                 <p class="mb-0">{{comment.body}}</p>
                 </ul>
             {% endfor %}
-            {%else%}
+            {%else%} {# empty#}
             <div class="text-center  p-4 comment">
                 <h6 class="mb-0"> لايوجد تعليقات.</h6>
             </div>
             {%endif%}
 
+       <h3 class="border-bottom pb-3 mb-3 mt-5">إضافة تعليق جديد</h3>
+       <div class="border p-4 mb-3 mt-4">
+        <form method="post">
+            {%csrf_token%} 
+            {{comment_form|crispy}}
+            <input class="btn btn-secondary mb-4 mt-4" type="submit" value="نشر التعليق">
+           </form>
+       </div>
        
+
      
 {% endblock content %}

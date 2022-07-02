@@ -1,0 +1,9 @@
+<ul class="list-group-flush latest_comment">
+    {% for comment in comments%}
+    <li class="border-bottom  list-group-item latest-comment-item">
+        <a class="text-dark" href="{% url 'detail' comment.post.pk  %}">{{comment.body}}</a>
+    </li>
+    {%empty%}
+    <li class="list-group-item latest-comment-item">لايوجد تعليقات</li>
+    {%endfor%}
+</ul>

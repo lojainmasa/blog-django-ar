@@ -24,19 +24,24 @@ body{
 /* End Post Content */
 
 /* Start Sidebar video 27*/
+
 .latest-post, .latest-comment{
     padding: 0 15px;
+    
 }
+
 .latest-post .latest-post-item, .latest-comment .latest-comment-item{
     padding: 6px;
 }
 .latest-post li:first-child,.latest-comment li:first-child{
-    border-top: 0;
+    border-top: 6;
 }
-.latest-post li:last-child,.latest-comment li:last-child{
+.latest-post li:last-child, .latest-comment li:last-child{
     border-bottom: 0;
     padding-bottom: 0;
 }
+
+
 /* Start Comment*/
 .comment{
     background-color: #f8f8f8;

@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.http import HttpResponse
 from .models import Post,Comment
-
+from .forms import NewComment
 '''
 posts=[
     {
@@ -63,10 +63,27 @@ def post_detail(request, post_id):
     print(post)
     comments=post.comments.filter(active=True)
     print(comments)
+    comment_form=NewComment()# video 30
+   
+    # new_comment=None# video 32
+
+    if request.method=='POST':
+        comment_form=NewComment(data=request.POST)
+        if comment_form.is_valid():
+            new_comment=comment_form.save(commit=False)
+            new_comment.post=post
+            new_comment.save()
+            comment_form=NewComment()
+
+    else:
+        comment_form==NewComment()
     context={
         'title':post ,
         'post':post,
         'comments':comments,
+        'comment_form':comment_form,
     }
+   
+
     template=loader.get_template('blog/detail.html')
     return HttpResponse(template.render(context,request))
