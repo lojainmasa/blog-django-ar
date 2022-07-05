@@ -1,15 +1,13 @@
-#from django.shortcuts import render
-
-# # Create your views here.
-
-# def home(request):
-#     return render(request, 'blog/index.html',{'title': 'Home'})
-
+from urllib import request
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.http import HttpResponse
 from .models import Post, Comment
-from .forms import NewComment
+from .forms import NewComment,PostCreateForm
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from django.views.generic import CreateView ,UpdateView,DeleteView  #this id for class views video 49
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib import messages
 '''
 posts=[
     {
@@ -45,9 +43,19 @@ posts=[
 
 
 def home(request):
+    posts=Post.objects.all()
+    paginator=Paginator(posts,5)
+    page=request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts=paginator.page(1)
+    except EmptyPage:
+        posts=paginator.page(paginator.num_page)
     context = {
         'title': 'الصفحة الرئيسية',
-        'posts': Post.objects.all()  # video26 we will use 'posts' in latest_post.html
+        'posts': posts , # video26 we will use 'posts' in latest_post.html
+        'page':page,
     }
     template = loader.get_template('blog/index.html')
     return HttpResponse(template.render(context, request))
@@ -91,3 +99,45 @@ def post_detail(request, post_id):
 
     template = loader.get_template('blog/detail.html')
     return HttpResponse(template.render(context, request))
+
+#vedio 48
+
+class PostCreateView(LoginRequiredMixin,CreateView):
+    model= Post
+    # fields=['title','content',]
+    template_name ='blog/new_post.html'
+    form_class=PostCreateForm
+    def form_valid(self, form) -> HttpResponse:
+        form.instance.auther=self.request.user
+        return super().form_valid(form)
+
+#vedio 49
+
+class PostUpdateView(UserPassesTestMixin ,LoginRequiredMixin,UpdateView):
+    model= Post
+    template_name ='blog/post_update.html'
+    form_class=PostCreateForm
+
+    def form_valid(self, form) -> HttpResponse:
+        form.instance.auther=self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post=self.get_object()
+        if self.request.user == post.auther:
+
+            return True
+        else:
+            return False
+
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+    model= Post
+    success_url='/'
+
+    def test_func(self):
+        post=self.get_object()
+        if self.request.user == post.auther:
+            # messages.success(request,'تم تحديث الملف الشخصي')
+            return True
+
+        return False

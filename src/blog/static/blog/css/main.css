@@ -47,3 +47,9 @@ body{
     background-color: #f8f8f8;
     border: 1px dashed #ccc
 }
+.btn-editing{
+    float: left;
+}
+.back-btn{
+    float: left;
+}

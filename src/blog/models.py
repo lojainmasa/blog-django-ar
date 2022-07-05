@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django.urls import reverse
 class Post(models.Model):
     # video 22
     title=models.CharField(max_length=100)
@@ -12,6 +12,11 @@ class Post(models.Model):
 
     def __str__(self):# video23 this fuction to show 'title' in blog ,control panel
         return self.title 
+
+    def get_absolute_url(self):#vedio 48 new_post
+        # return f'/detail/{self.pk}'
+        return reverse('detail',args=[self.pk])# function reverse 
+
     
     class Meta:
         ordering=('-Post_date',) # vdeo 26 this is for ordering blogs from latest to first

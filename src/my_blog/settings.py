@@ -134,3 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK='bootstrap4'# video 31
 
 LOGIN_REDIRECT_URL='home' #video 37
+LOGIN_URL = 'login'#vedio48 this is for new_post
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')# video 43
+MEDIA_URL = '/media/'
