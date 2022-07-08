@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django import template
 from blog.models import Post ,Comment
 

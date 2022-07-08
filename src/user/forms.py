@@ -18,6 +18,7 @@ class UserCreationForm(forms.ModelForm):
         fields=('username','email','first_name',
                 'last_name','password1','password2'
         )
+        
     def clean_password2(self): #video35 thid function to verify that passwords match
         cd=self.cleaned_data
         if cd['password1']!=cd['password2']:
@@ -29,6 +30,7 @@ class UserCreationForm(forms.ModelForm):
         if User.objects.filter(username=cd['username']).exists():
             raise forms.ValidationError('يوجد مستخدم مسجل بهذا الأسم')
         return cd['username']# الخطا السابق سيظهر تحت حقل username
+
 
 class LoginForm(forms.ModelForm):#video 38
     username=forms.CharField(label='اسم المستخدم')
